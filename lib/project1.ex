@@ -2,11 +2,41 @@ defmodule Project1 do
   @moduledoc """
   Documentation for Project1.
   """
+  def main(zerolead) do
+    pid1 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid1, {pid1,zerolead})
+    pid2 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid2, {pid2,zerolead})
+    pid3 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid3, {pid3,zerolead}) 
+    pid4 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid4, {pid4,zerolead})
+    pid5 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid5, {pid5,zerolead})
+    pid6 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid6, {pid6,zerolead})
+    pid7 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid7, {pid7,zerolead})
+    pid8 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid8, {pid8,zerolead})
+    pid9 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid9, {pid9,zerolead})
+    pid10 = Node.spawn(Node.self, Project1, :loop, [])
+    send(pid10, {pid10,zerolead})
+
+    loop()
+  end
+
+  def loop do
+    receive do
+      {pid, k} -> bitcoingen(k)
+    end
+  end
+
 
   def bitcoingen(zerolead) do
-    k = zerolead
-    substr = ""
-    substr = createzero(k,substr)
+    k = Enum.at(zerolead,0) |> String.to_integer
+    substr = String.duplicate("0",k)
     i = 1;
     input_left = "rahulp248;"
     input_right = :crypto.strong_rand_bytes(6) |> Base.encode64
@@ -16,20 +46,9 @@ defmodule Project1 do
     bitcoingen(zerolead)
   end
 
-  def createzero(k,substr) do
-    if(k>0) do
-      substr = substr <> "0"
-      createzero(k-1, substr)
-    else 
-      substr
-    end
-  end
 
   def keygen(k,start,inter,i,substr) do
-    val = :crypto.hash_init(:sha256)
-    val = :crypto.hash_update(val,inter)
-    val_bin = :crypto.hash_final(val)
-    val_hex = val_bin |> Base.encode16 |> String.downcase
+    val_hex = :crypto.hash(:sha256,inter) |> Base.encode16 |> String.downcase
     if(String.slice(val_hex,0,k) == substr) do
       IO.puts "#{start}\t#{val_hex}"
     else
