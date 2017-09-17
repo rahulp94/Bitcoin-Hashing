@@ -2,37 +2,47 @@ defmodule Project1 do
   @moduledoc """
   Documentation for Project1.
   """
+
+  #def main(zerolead) do
+  #  k = Enum.at(zerolead,0) |> String.trim
+  #  if String.contains?(k,".") do
+  #    IO.puts "hello"
+  #  else
+  #    k = k |> String.to_integer
+  #    multitask(k)
+  #  end
+  #end
+
   def main(zerolead) do
-    pid1 = Node.spawn(Node.self, Project1, :loop, [])
+    pid1 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid1, {pid1,zerolead})
-    pid2 = Node.spawn(Node.self, Project1, :loop, [])
+    pid2 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid2, {pid2,zerolead})
-    pid3 = Node.spawn(Node.self, Project1, :loop, [])
+    pid3 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid3, {pid3,zerolead}) 
-    pid4 = Node.spawn(Node.self, Project1, :loop, [])
+    pid4 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid4, {pid4,zerolead})
-    pid5 = Node.spawn(Node.self, Project1, :loop, [])
+    pid5 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid5, {pid5,zerolead})
-    pid6 = Node.spawn(Node.self, Project1, :loop, [])
+    pid6 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid6, {pid6,zerolead})
-    pid7 = Node.spawn(Node.self, Project1, :loop, [])
+    pid7 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid7, {pid7,zerolead})
-    pid8 = Node.spawn(Node.self, Project1, :loop, [])
+    pid8 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid8, {pid8,zerolead})
-    pid9 = Node.spawn(Node.self, Project1, :loop, [])
+    pid9 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid9, {pid9,zerolead})
-    pid10 = Node.spawn(Node.self, Project1, :loop, [])
+    pid10 = Node.spawn(Node.self, Project1, :msg, [])
     send(pid10, {pid10,zerolead})
 
-    loop()
+    msg()
   end
 
-  def loop do
+  def msg do
     receive do
       {pid, k} -> bitcoingen(k)
     end
   end
-
 
   def bitcoingen(zerolead) do
     k = Enum.at(zerolead,0) |> String.to_integer
